@@ -1,4 +1,4 @@
-/* Create Tables
+/* Create and Populate Tables
 	NOTE: When running, if currently any tables exist, they will get deleted.
 	Please refer to the uploaded ERDiagram for a visual presentation.
 Author: Nikki Moteva
