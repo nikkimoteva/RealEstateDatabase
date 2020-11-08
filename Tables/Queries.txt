@@ -1,0 +1,480 @@
+/* All queries grouped by their functionalities
+Author: Nikki Moteva
+Saturday, Nov 7, 2020 */
+
+Branch and BranchLocation:
+    Insert Operation:  Refer to statements.sql
+
+    Delete Opertation:
+        DELETE FROM Branch
+        WHERE managerID = 2;
+
+    Update Operation: 
+        UPDATE BranchLocation
+        SET address = '49 49th Avenue'
+        WHERE address = '1 Fir Street';
+
+        UPDATE Branch
+        SET rating = 4.5 
+        WHERE branchID = 3;
+
+    Select Operation:
+        SELECT managerID, branchID, rating
+        FROM Branch
+        WHERE rating >= 4.0;
+
+    Projection Operation:
+        SELECT address, branchID, rating
+        FROM Branch;
+
+    Join Operation:
+        SELECT branchID, address
+        FROM Branch
+        WHERE managerID > ALL (
+            SELECT MAX(managerID)
+            FROM Branch b, BranchLocation bl
+            WHERE bl.country = 'Canada' AND b.address = bl.address
+        );
+
+    Division: N/A
+
+
+Movers and Pricing:
+    Insert Operation: Refer to statements.sql
+
+    Delete Opertation:
+        DELETE FROM Pricing
+        WHERE price < 20;
+
+    Update Operation:
+        UPDATE Movers
+        SET rating = 2.7 
+        Where moverID = 2;
+
+        UPDATE Pricing
+        SET truckSize = 'S'
+        WHERE numMovers = 1;
+
+    Select Operation:
+        SELECT moverID
+        from Movers
+        where price <= 25;
+
+    Projection Operation:
+        SELECT numMovers, price, truckSize
+        FROM Pricing
+        WHERE numMovers >= 2;
+
+    Join Operation:
+        SELECT moverID
+        FROM Movers m, Pricing p
+        WHERE m.price = p.price AND p.numMovers >= 2 AND m.price <= 30;
+
+    Division: N/A
+
+
+Provides:
+    Insert Operation: Refer to statements.sql
+
+    Delete Opertation: N/A, gets deleted through cascade
+
+    Update Operation: N/A, gets updated through the Movers and Branch Entities
+
+    Select Operation:
+        SELECT moverID
+        FROM Provides
+        WHERE branchID = 1;
+
+    Projection Operation: N/A
+
+    Join Operation: 
+        SELECT price, Movers.moverID
+        FROM Provides, Movers
+        WHERE PROVIDES.moverID = Movers.moverID AND branchID = 2;
+
+    Division: N/A
+
+
+Employs:
+    Insert Operation: Refer to statements.sql
+
+    Delete Opertation: N/A
+
+    Update Operation: N/A
+
+    Select Operation:
+        SELECT b.address
+        FROM Employs e, Branch b
+        WHERE e.branchID = 2 AND e.branchID = b.branchID;
+
+    Projection Operation: N/A
+
+    Join Operation:
+        SELECT e.branchID
+        FROM AgentRepresents ar, Employs e
+        WHERE ar.agentID = e.agentID and ar.email = 'joyce@yahoo.com';
+
+    Division: N/A
+
+
+AgentRepresents:
+    Insert Operation: Refer to statements.sql
+
+    Delete Opertation:
+        DELETE FROM AgentRepresents
+        WHERE email = 'john@yahoo.com';
+
+    Update Operation:
+        UPDATE AgentRepresents
+        SET rating = 1.0
+        WHERE rating = 0;
+
+    Select Operation:
+        SELECT email
+        FROM AgentRepresents
+        WHERE rating >= 3.9;
+
+    Projection Operation:
+        SELECT email, phone, rating
+        FROM AgentRepresents
+        WHERE salary > 100000;
+
+    Join Operation:
+        SELECT l.lawSchool
+        from Lawyer l, AgentRepresents ar
+        WHERE l.lawyerID = ar.lawyerID AND ar.rating <= 3.0;
+
+    Division: N/A
+
+
+Lawyer:
+    Insert Operation: Refer to statements.sql
+
+    Delete Opertation:
+        DELETE FROM Lawyer
+        WHERE lawyerID = 1;
+
+    Update Operation:
+        UPDATE Lawyer
+        SET cost = 300
+        WHERE lawyerID = 2;
+
+    Select Operation:
+        SELECT cost, lawyerID
+        FROM Lawyer
+        WHERE rating > 3.5;
+
+    Projection Operation:
+        SELECT cost, rating, lawyerID
+        FROM Lawyer
+        WHERE cost < 150;
+
+    Join Operation:
+        SELECT ar.agentID
+        FROM AgentRepresents ar, Lawyer l
+        where l.lawyerID = ar.lawyerID AND l.cost <= 200 AND ar.rating > 3.7;
+
+    Division: N/A
+
+
+Appoints:
+    Insert Operation: Refer to statements.sql
+    Delete Opertation: N/A
+    Update Operation: N/A
+
+    Select Operation:
+        SELECT count(*)
+        FROM Appoints;
+
+    Projection Operation: N/A
+
+    Join Operation:
+        SELECT managerID
+        FROM Branch b, Appoints a
+        WHERE b.branchID = a.branchID AND NOT EXISTS (
+            SELECT l.lawyerID
+            FROM Appoints a, Lawyer l
+            WHERE l.lawyerID = a.lawyerID AND l.cost > 250 AND b.branchID = a.branchID
+        );
+
+    Division: N/A
+
+
+Amenity:
+    Insert Operation: Refer to statements.sql
+    Delete Opertation: N/A
+    Update Operation:
+        UPDATE Amenity
+        SET aType = 'pool and jacuzzi'
+        where propertyID = 1;
+
+    Select Operation:
+        SELECT aType
+        FROM Amenity a, Property p
+        WHERE aType LIKE '%pool%' and p.propertyID = a.propertyID;
+
+    Projection Operation:
+        SELECT aType
+        FROM Amenity;
+
+    Join Operation:
+        SELECT aType
+        FROM Amenity a, Property p
+        WHERE p.propertyID = Amenity.propertyID AND p.listedPrice < 1000000;
+
+    Division: N/A
+
+
+Property and PropertyInfo:
+    Insert Operation: Refer to statements.sql
+    Delete Opertation: ***SHOULD DELETE AMENITY, DISPLAY THAT IT DOES***
+        DELETE FROM PropertyInfo
+        WHERE address = '3212 Jervis St';
+
+    Update Operation:
+        UPDATE PropertyInfo
+        SET listedPrice = listedPrice - 10000
+        WHERE address = '3212 Jervis St';
+
+    Select Operation:
+        (SELECT propertyID
+        FROM Property)
+        EXCEPT
+        (SELECT propertyID
+        FROM PropertyInfo pi, Property p
+        WHERE floors > 1 AND pi.address = p.address);
+
+    Projection Operation:
+        SELECT floors, sqft, listedPrice
+        FROM PropertyInfo
+        WHERE address = '3212 Jervis St';
+
+    Join Operation:
+        SELECT s.fullName
+        FROM Seller s, Property p
+        where s.sellerID = p.sellerID AND EXISTS (
+            SELECT *
+            FROM PropertyInfo pi, Property p
+            WHERE p.address = pi.address AND pi.listedPrice < 1000000
+        ) ORDER BY s.fullName;
+
+    Division: 
+        Find all buyers who can afford any of the current property listings:
+        SELECT b.buyerID, b.fullName
+        FROM Buyer b
+        WHERE NOT EXISTS
+        (//apartments that the buyer cannot afford
+            SELECT p.propertyID
+            FROM Property p, PropertyInfo pi
+            WHERE pi.listedPrice > b.budget AND p.address = pi.address
+            EXCEPT
+            SELECT po.propertyID
+            FROM PropertyOversees po
+            WHERE po.buyerID = b.buyerID
+        );
+
+        Find property that every buyer could afford:
+        SELECT pi.address
+        FROM PropertyInfo pi
+        WHERE NOT EXISTS ( // Find properties that not everyone could afford
+            (SELECT b.buyerID
+            FROM Buyer b
+            WHERE b.budget < pi.listedPrice)
+            EXCEPT
+            (SELECT po.buyerID
+            FROM PropertyOversees po, Property p
+            WHERE po.propertyID = p.propertyID AND p.address = pi.address)
+        );
+
+
+
+Buyer:
+    Insert Operation: Refer to statements.sql
+    Delete Opertation:
+        DELETE FROM Buyer
+        WHERE email = 'arianagrande@gmail.com';
+
+    Update Operation:
+        UPDATE Buyer
+        SET budget = 2000000
+        WHERE email = 'arianagrande@gmail.com';
+
+    Select Operation:
+        SELECT salary, fullName
+        FROM Buyer
+        WHERE budget > 1000000;
+
+    Projection Operation:
+        SELECT phone, email, fullName
+        FROM Buyer
+        WHERE budget > 500000;
+
+    Join Operation:
+        SELECT fullName
+        FROM Buyer
+        WHERE salary > 900000
+        INTERSECT
+        SELECT fullName
+        FROM Buyer b, Wants w, PropertyInfo pi, Property p
+        WHERE b.buyerID = w.buyerID AND w.propertyID = p.propertyID AND p.address = pi.address AND b.budget >=pi.listedPrice;
+    
+    Division: N/A
+
+
+Wants:
+    Insert Operation: Refer to statements.sql
+
+    Delete Opertation: N/A
+
+    Update Operation: N/A
+
+    Select Operation:
+        SELECT count(*)
+        FROM Wants;
+
+    Projection Operation: N/A
+
+    Join Operation:
+        SELECT w.buyerID, w.propertyID
+        FROM Buyer b, Wants w
+        WHERE w.buyerID = 2 and b.buyerID = w.buyerID;
+
+    Division: N/A
+
+
+Seller:
+    Insert Operation: Refer to statements.sql
+
+    Delete Opertation:
+        DELETE FROM Seller
+        WHERE fullName = 'Bob One';
+
+    Update Operation:
+        UPDATE Seller
+        SET targetPrice = targetPrice - 1000
+        WHERE sellerID = 2;
+
+    Select Operation:
+        SELECT email
+        FROM Seller
+        WHERE targetPrice <= 1500000;
+
+    Projection Operation:
+        SELECT phone, email, targetPrice
+        FROM Seller
+        WHERE fullName = 'Bob Two';
+
+    Join Operation:
+        SELECT propertyID, address
+        FROM Seller s, Property p
+        WHERE p.sellerID = s.sellerID;
+
+    Division: N/A
+
+
+Apartments:
+    Insert Operation: Refer to statements.sql
+
+    Delete Opertation:
+        DELETE FROM Apartments
+        WHERE association = 'HOA';
+
+    Update Operation:
+        UPDATE Apartments
+        SET association = 'Strata'
+        WHERE association = 'HOA' AND propertyID<30 AND propertyID > 2;
+
+    Select Operation:
+        SELECT propertyID
+        FROM Apartments
+        WHERE level <=2;
+
+    Projection Operation:
+        SELECT propertyID, level
+        FROM Apartments
+        WHERE association = 'Strata';
+
+    Join Operation: N/A - Done through Property
+
+    Division: N/A
+
+
+House:
+    Insert Operation: Refer to statements.sql
+
+    Delete Opertation:
+        DELETE FROM House
+        WHERE propertyID = 2;
+
+    Update Operation:
+        UPDATE House
+        SET rentalUnits = 2
+        WHERE propertyID = 1;
+
+    Select Operation:
+        SELECT rentalUnits
+        FROM House
+        WHERE propertyID = 2;
+
+    Projection Operation:
+        SELECT propertyID, rentalUnits
+        FROM House 
+        WHERE rentalUnits > 1;
+
+    Join Operation: N/A - Done through Property
+
+    Division: N/A
+
+
+PropertyOversees:
+    Insert Operation: Refer to statements.sql
+    Delete Opertation:
+        DELETE FROM PropertyOversees
+        WHERE sellerID = 2;
+
+        DELETE FROM PropertyOversees
+        WHERE propertyID = 5;
+
+    Update Operation: N/A
+
+    Select Operation:
+        SELECT propertyID
+        FROM PropertyOversees
+        WHERE buyerID = 2;
+
+    Projection Operation:
+        SELECT propertyID, sellerID, buyerID
+        FROM PropertyOversees
+        WHERE agentID = 2;
+
+    Join Operation:
+        SELECT ar.agentID, ar.email
+        FROM PropertyOversees po, AgentRepresents ar
+        WHERE ar.agentID = po.agentID and po.propertyID IN(
+            SELECT p.propertyID
+            FROM Buyer b, Wants w, Property p
+            WHERE b.buyerID = w.buyerID AND w.propertyID = p.propertyID AND b.budget > 2000000
+        );
+
+        SELECT *
+        FROM PropertyOversees po, AgentRepresents ar
+        WHERE po.agentID = ar.agentID AND ar.email LIKE '%s@yahoo.co_';
+
+        // find all buyers that have not yet been matched
+        (SELECT b.buyerID
+        FROM Buyer b)
+        EXCEPT
+        (SELECT po.buyerID
+        FROM Property p, PropertyOversees po
+        WHERE p.propertyID = po.propertyID);
+
+        // find all buyers that have been matched
+        SELECT DISTINCT buyerID
+        FROM PropertyOversees;
+
+    Division: N/A
+    
+    Aggregation with Group By:
+    Aggregation with Having:
+    Nested Aggregation with Group By:
+
