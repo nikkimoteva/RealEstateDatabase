@@ -340,3 +340,41 @@ WHERE p.propertyID = po.propertyID);
 /*find all buyers that have been matched*/
 SELECT DISTINCT buyerID
 FROM PropertyOversees;
+
+/*find the total number of properties each buyer is interested in*/
+SELECT b.buyerID, b.fullName, count(po.propertyID) AS isInterested
+FROM PropertyOversees po, Buyer b, Wants w
+WHERE po.buyerID = w.buyerID and w.buyerID = b.buyerID
+GROUP BY b.buyerID, b.fullName;
+
+/*find the average salary agents make as their rating increases, and who have a rating higher than 2.9*/
+SELECT ar.rating, AVG(ar.salary) AS salary
+FROM PropertyOversees po, AgentRepresents ar
+WHERE po.agentID = ar.AgentID
+GROUP BY ar.rating
+HAVING ar.rating > 2.9;
+
+/*Find the agent with the most number of properties they oversee*/
+SELECT po.agentID, count(*) AS Oversees
+FROM PropertyOversees po, Property p
+where po.propertyID = p.propertyID
+GROUP BY po.agentID
+HAVING count(po.propertyID) >= (
+    SELECT MAX(allProperties)
+    FROM (
+        SELECT count(*) AS allProperties
+        FROM PropertyOversees
+        GROUP BY agentID
+    ) properties
+);
+
+/*find buyers and how many properties they are interested in that is within their budget*/
+SELECT b.buyerID, b.fullName, count(*) AS withinBudget
+FROM PropertyOversees po, Buyer b
+WHERE po.buyerID = b.buyerID
+GROUP BY b.buyerID, b.budget, b.fullName
+HAVING b.budget >= ALL (
+    SELECT s.targetPrice
+    FROM PropertyOversees po2, Seller s
+    WHERE po2.buyerID = b.buyerID AND po2.sellerID = s.sellerID
+);
