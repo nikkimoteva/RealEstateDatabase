@@ -214,15 +214,8 @@ function handleDeleteRequest() {
 
 //    echo "hey";
     $query = "DELETE FROM apartments WHERE propertyID='" . $propertyid . "'";
-//    $query2 = "DELETE FROM apartments WHERE propertyID = 1";
-    
-//    if (strcmp($query1, $query2) == 0){
-//        echo 'the delete statements are equal ~~~~';
-//    } else {
-//        echo 'the delete statements are NOT equal ~~~~';
-//    }
-//    echo $query;
     executePlainSQL($query);
+    executePlainSQL("commit");
 
 }
 

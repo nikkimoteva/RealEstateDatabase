@@ -207,8 +207,8 @@ function handleDeleteRequest() {
     $propertyid = $_POST['propertyid'];
 
     $query = "DELETE FROM property WHERE propertyid='" . $propertyid . "'";
-    echo $query;
     executePlainSQL($query);
+    executePlainSQL("commit");
 
 }
 

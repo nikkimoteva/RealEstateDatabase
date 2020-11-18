@@ -218,8 +218,8 @@ function handleDeleteRequest() {
     $sellerid = $_POST['sellerid'];
 
     $query = "DELETE FROM seller WHERE sellerid='" . $sellerid . "'";
-    echo $query;
     executePlainSQL($query);
+    executePlainSQL("commit");
 
 }
 

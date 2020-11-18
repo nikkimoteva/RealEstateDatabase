@@ -214,8 +214,8 @@ function handleDeleteRequest() {
     $branchid = $_POST['branchid'];
 
     $query = "DELETE FROM branch WHERE branchid='" . $branchid . "'";
-    echo $query;
     executePlainSQL($query);
+    executePlainSQL("commit");
 
 }
 

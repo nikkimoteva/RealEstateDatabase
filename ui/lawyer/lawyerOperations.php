@@ -214,9 +214,9 @@ function handleDeleteRequest() {
 
     $lawyerid = $_POST['lawyerid'];
 
-    $query = "DELETE FROM lawyer WHERE lawyerid='" . $lawyerid . "'";
-    echo $query;
+    $query = "DELETE FROM lawyer WHERE lawyerID=" . $lawyerid; //.";";
     executePlainSQL($query);
+    executePlainSQL("commit");
 
 }
 

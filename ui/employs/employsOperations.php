@@ -208,8 +208,8 @@ function handleDeleteRequest() {
     $agentID = $_POST['agentid'];
 
     $query = "DELETE FROM employs WHERE agentID='" . $agentID . "'";
-    echo $query;
     executePlainSQL($query);
+    executePlainSQL("commit");
 
 }
 

@@ -218,8 +218,8 @@ function handleDeleteRequest() {
     $address = $_POST['address'];
 
     $query = "DELETE FROM propertyInfo WHERE address='" . $address . "'";
-    echo $query;
     executePlainSQL($query);
+    executePlainSQL("commit");
 
 }
 

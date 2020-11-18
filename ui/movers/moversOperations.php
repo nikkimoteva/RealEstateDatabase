@@ -212,8 +212,8 @@ function handleDeleteRequest() {
     $moverID = $_POST['moversid'];
 
     $query = "DELETE FROM movers WHERE moverid='" . $moverID . "'";
-    echo $query;
     executePlainSQL($query);
+    executePlainSQL("commit");
 
 }
 

@@ -216,8 +216,8 @@ function handleDeleteRequest() {
     $price = $_POST['price'];
 
     $query = "DELETE FROM pricing WHERE price='" . $price . "'";
-    echo $query;
     executePlainSQL($query);
+    executePlainSQL("commit");
 
 }
 
