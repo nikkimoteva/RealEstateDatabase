@@ -37,7 +37,7 @@
                          </select>
                         <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../agent/agentView.php">Agent Represents</a> </li>
                         <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../amenity/amenityView.php">Amenity</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../apartments/apartmentView.php">Appartments</a> </li>
+                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../apartments/apartmentView.php">Apartments</a> </li>
                         <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../appoints/appointsView.php">Appoints</a> </li>
                         <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../branch/branchView.php">Branch</a> </li>
                         <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../branchLocation/branchLocationView.php">Branch Location</a> </li>
@@ -69,12 +69,12 @@
                         <form method="POST" action="amenityInsert.php">
                             <button type="submit" class="btn btn-light m-4" name = "insert">Insert</button>
                         </form>
-<!--                         <form method="POST" action="amenityUpdate.php">
+                        <form method="POST" action="amenityUpdate.php">
                             <button type="submit" class="btn btn-light m-4" name = "update">Update</button>
-                        </form> -->
-<!--                         <form method="POST" action="amenityDelete.php">
+                        </form>
+                        <form method="POST" action="amenityDelete.php">
                             <button type="submit" class="btn btn-light m-4" name = "delete">Delete</button>
-                        </form> -->
+                        </form>
                         <form method="POST" action="amenityView.php">
                             <button type="submit" class="btn btn-light m-4" name = "view">View</button>
                         </form>

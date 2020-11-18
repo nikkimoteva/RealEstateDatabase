@@ -35,7 +35,7 @@
                          </select>
                         <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../agent/agentView.php">Agent Represents</a> </li>
                         <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../amenity/amenityView.php">Amenity</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../apartments/apartmentView.php">Appartments</a> </li>
+                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../apartments/apartmentView.php">Apartments</a> </li>
                         <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../appoints/appointsView.php">Appoints</a> </li>
                         <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../branch/branchView.php">Branch</a> </li>
                         <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../branchLocation/branchLocationView.php">Branch Location</a> </li>
@@ -61,10 +61,9 @@
 
                 <div class="row">
                         <p class= "display-4 m-2">House</p>
-                    <!--
                         <form method="POST" action="houseSelect.php">
                             <button type="submit" class="btn btn-light m-4" name = "select" >Select</button>
-                        </form> --->
+                        </form> 
                         <form method="POST" action="houseInsert.php">
                             <button type="submit" class="btn btn-light m-4" name = "insert">Insert</button>
                         </form>
