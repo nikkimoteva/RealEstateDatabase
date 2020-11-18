@@ -107,6 +107,15 @@ function disconnectFromDB() {
     OCILogoff($db_conn);
 }
 
+function printResultAmenity () {
+ global $db_conn;
+ $price = $_POST['Price'];
+ $query =  "select aType from amenity a, property p, propertyInfo info where p.propertyID = a.propertyID AND p.address = info.address AND info.listedPrice < $price";
+ $result = executePlainSQL($query);
+ printResult($result);
+ OCICommit($db_conn);
+}
+
 function handleUpdateRequest() {
     global $db_conn;
 
@@ -224,6 +233,10 @@ function handlePOSTRequest() {
             // echo "delete tuple\n";
             handleDeleteRequest();
         }
+        else if(array_key_exists('amenityPriceMore', $_POST)) {
+         printResultAmenity();
+        }
+
         disconnectFromDB();
     }
 }
@@ -240,11 +253,13 @@ function handleGETRequest() {
     }
 }
 
-if (isset($_POST['select']) || isset($_POST['insert']) || isset($_POST['update'])|| isset($_POST['delete'])) {
+
+if (isset($_POST['select']) || isset($_POST['insert']) || isset($_POST['update'])|| isset($_POST['delete']) || isset($_POST['priceMore'])) {
     handlePOSTRequest();
 } else if (isset($_GET['countTupleRequest'])) {
     handleGETRequest();
-} else {
+}
+else {
     if(connectToDB()) {
         $result = executePlainSQL("select * from amenity");
         printResult($result);

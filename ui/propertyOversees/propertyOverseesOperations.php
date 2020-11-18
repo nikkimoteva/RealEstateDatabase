@@ -255,8 +255,47 @@ function handleGETRequest() {
     }
 }
 
+
+if (isset($_POST['menu'])) {
+ echo "Okay i am here";
+
+}
+
 if (isset($_POST['select']) || isset($_POST['insert']) || isset($_POST['update'])|| isset($_POST['delete'])) {
     handlePOSTRequest();
+} else if (isset($_POST['NO-PROP'])) {
+     if(connectToDB()) {
+        $result = executePlainSQL("SELECT b.buyerID, b.fullName, count(po.propertyID) AS isInterested
+                                           FROM PropertyOversees po, Buyer b, Wants w
+                                           WHERE po.buyerID = w.buyerID and w.buyerID = b.buyerID
+                                           GROUP BY b.buyerID, b.fullName");
+        printResult($result);
+     }
+} else if (isset($_POST['AgentSalary'])) {
+      if(connectToDB()) {
+         $result = executePlainSQL("SELECT ar.rating, AVG(ar.salary) AS salary
+                                            FROM PropertyOversees po, AgentRepresents ar
+                                            WHERE po.agentID = ar.AgentID
+                                            GROUP BY ar.rating
+                                            HAVING ar.rating > 2.9");
+         printResult($result);
+      }
+} else if (isset($_POST['AgentMostNumber'])) {
+        if(connectToDB()) {
+           $result = executePlainSQL("SELECT po.agentID, count(*) AS Oversees
+                                              FROM PropertyOversees po, Property p
+                                              where po.propertyID = p.propertyID
+                                              GROUP BY po.agentID
+                                              HAVING count(po.propertyID) >= (
+                                                  SELECT MAX(allProperties)
+                                                  FROM (
+                                                      SELECT count(*) AS allProperties
+                                                      FROM PropertyOversees
+                                                      GROUP BY agentID
+                                                  ) properties
+                                              )");
+           printResult($result);
+        }
 } else if (isset($_GET['countTupleRequest'])) {
     handleGETRequest();
 } else {

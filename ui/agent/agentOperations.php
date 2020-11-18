@@ -77,7 +77,13 @@ See the sample code below for how this function is used */
 
 function printResult($result) { //prints results from a select statement
     while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
-          echo "<tr>" . "<td>" . $row[0] . "</td> <td>" . $row[1] . "</td> <td>" . $row[2] . "</td> <td>" . $row[3] . "</td> <td>" . $row[4] . "</td> <td>" . $row[5] . "</td> </tr>";; //or just use "echo $row[0]" 
+          echo "<tr>" . "<td>" . $row[0] . "</td> <td>" . $row[1] . "</td> <td>" . $row[2] . "</td> <td>" . $row[3] . "</td> <td>" . $row[4] . "</td> <td>" . $row[5] . "</td> </tr>"; //or just use "echo $row[0]"
+    }
+}
+
+function printResultProject($result) { //prints results from a select statement
+    while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
+          echo "<tr>" . "<td>". $row[0]."</td> </tr>";
     }
 }
 
@@ -265,7 +271,13 @@ if (isset($_POST['select']) || isset($_POST['insert']) || isset($_POST['update']
     handlePOSTRequest();
 } else if (isset($_GET['countTupleRequest'])) {
     handleGETRequest();
-} else {
+} else if (isset($_POST['project'])) {
+   if(connectToDB()) {
+           $result = executePlainSQL("select email from agentRepresents");
+           printResultProject($result);
+       }
+ }
+ else {
     if(connectToDB()) {
         $result = executePlainSQL("select * from agentRepresents");
         printResult($result);

@@ -18,7 +18,7 @@ function executePlainSQL($cmdstr) { //takes a plain (no bound variables) SQL com
     //echo "<br>running ".$cmdstr."<br>";
     global $db_conn, $success;
 
-    $statement = OCIParse($db_conn, $cmdstr); 
+    $statement = OCIParse($db_conn, $cmdstr);
     //There are a set of comments at the end of the file that describe some of the OCI specific functions and how they work
 
     if (!$statement) {
@@ -43,7 +43,7 @@ function executePlainSQL($cmdstr) { //takes a plain (no bound variables) SQL com
 function executeBoundSQL($cmdstr, $list) {
     /* Sometimes the same statement will be executed several times with different values for the variables involved in the query.
 In this case you don't need to create the statement several times. Bound variables cause a statement to only be
-parsed once and you can reuse the statement. This is also very useful in protecting against SQL injection. 
+parsed once and you can reuse the statement. This is also very useful in protecting against SQL injection.
 See the sample code below for how this function is used */
 
     global $db_conn, $success;
@@ -77,14 +77,14 @@ See the sample code below for how this function is used */
 
 function printResult($result) { //prints results from a select statement
     while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
-          echo "<tr>" . "<td>" . $row[0] . "</td> <td>" . $row[1] . "</td> <td>" . $row[2] . "</td> <td>" . $row[3] . "</td> </tr>";; //or just use "echo $row[0]" 
+          echo "<tr>" . "<td>" . $row[0] . "</td> <td>" . $row[1] . "</td> <td>" . $row[2] . "</td> <td>" . $row[3] . "</td> </tr>";; //or just use "echo $row[0]"
     }
 }
 
 function connectToDB() {
     global $db_conn;
 
-    // Your username is ora_(CWL_ID) and the password is a(student number). For example, 
+    // Your username is ora_(CWL_ID) and the password is a(student number). For example,
     // ora_platypus is the username and a12345678 is the password.
     $db_conn = OCILogon("ora_phillngs", "a18569673", "dbhost.students.cs.ubc.ca:1522/stu");
 
@@ -116,17 +116,17 @@ function handleUpdateRequest() {
     $floors = $_POST['floors'];
     $sqft = $_POST['sqft'];
     $listedprice = $_POST['listedprice'];
-    
+
     $query = "UPDATE propertyInfo SET";
     //
-    if ($floors != "") { 
+    if ($floors != "") {
         $query = $query . " floors='".$floors."'";
-    } else if ($sqft != "") { 
+    } else if ($sqft != "") {
         $query = $query .  " sqft='".$sqft."'";
-    } else if ($listedprice != ""){ 
+    } else if ($listedprice != ""){
         $query = $query .  " listedprice='".$listedprice."'";
-    } 
-    
+    }
+
     $query = $query .  " WHERE address='" . $address . "'";
 
 
@@ -240,7 +240,6 @@ function handlePOSTRequest() {
             // echo "delete tuple\n";
             handleDeleteRequest();
         }
-        
         disconnectFromDB();
     }
 }
@@ -257,11 +256,19 @@ function handleGETRequest() {
     }
 }
 
-if (isset($_POST['select']) || isset($_POST['insert']) || isset($_POST['update'])|| isset($_POST['delete'])) {
+if (isset($_POST['select']) || isset($_POST['insert']) || isset($_POST['update']) || isset($_POST['delete']) ) {
     handlePOSTRequest();
 } else if (isset($_GET['countTupleRequest'])) {
     handleGETRequest();
-} else {
+} else if ( isset($_POST["allAffordable"])) {
+  if (connectToDB()) {
+       $query = "SELECT pi.address FROM propertyInfo pi WHERE NOT EXISTS ((SELECT b.buyerID FROM buyer b WHERE b.budget < pi.listedPrice) MINUS (SELECT po.buyerID FROM propertyOversees po, property p WHERE po.propertyID = p.propertyID AND p.address = pi.address))";
+
+       $result = executePlainSQL($query);
+       printResult($result);
+     }
+}
+ else {
     if(connectToDB()) {
         $result = executePlainSQL("select * from propertyInfo");
         printResult($result);

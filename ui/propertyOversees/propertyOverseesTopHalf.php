@@ -9,33 +9,27 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="styling.js"> </script>
+        <script type="text/javascript" src= "../privelageOptions.js"></script>
     </head>
 
 
-    <body>
+    <body onload = "doStuff2()">
 
     <nav class = "navbar navbar-dark sticky-top bg-dark flex-mid-nowrap p-0 shadow">
         <a href = "../index.php"> <h1 class = "display-3 m-4 text-light">Real Estate</h1> </a>
     </nav>
-        
-        
-        
     <div class = "container-fluid">
-    
+
         <div class = "row">
-            
+
             <nav id = "sidebarMenu" class = "col-md-3 d-md-block bg-light" >
                 <div class = "sidebar-sticky pt-3">
-                        <ul class = "nav flex-column mb-2"> 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Privilege 
-                            </a>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">Manager</a>
-                              <a class="dropdown-item" href="#">Agent</a>
-                              <a class="dropdown-item" href="#">Customer</a>
-                            </div>
-                        </li>
+                        <ul class = "nav flex-column mb-2">
+                         <select class="form-control" name="dropdown-menu" id="dropdown-menu" onchange="doIt()" >
+                              <option value="Manager">Manager</option>
+                              <option value="Agent">Agent</option>
+                              <option value="Customer">Customer</option>
+                         </select>
                         <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../agent/agentView.php">Agent Represents</a> </li>
                         <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../amenity/amenityView.php">Amenity</a> </li>
                         <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../apartments/apartmentView.php">Appartments</a> </li>
@@ -53,13 +47,11 @@
                         <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../propertyOversees/propertyOverseesView.php">PropertyOversees </a></li>
                         <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../provides/providesView.php">Provides</a> </li>
                         <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../seller/sellerView.php">Seller</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../wants/wantsView.php">Wants</a> </li>  
+                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../wants/wantsView.php">Wants</a> </li>
                     </ul>
                 </div>
             </nav>
 
-
-            
             <main role = "main" class = "col-md-9 ml-sm-auto px-md-4">
 
                 <div class="row">
@@ -78,5 +70,14 @@
                         </form>
                         <form method="POST" action="propertyOverseesView.php">
                             <button type="submit" class="btn btn-light m-4" name = "view">View</button>
+                        </form>
+                        <form method="POST" action="propertyOverseesNoProperties.php">
+                            <button type="submit" class="btn btn-light m-4" name = "NO-PROP">Find buyers and number of properties they are interested in</button>
+                        </form>
+                        <form method="POST" action="propertyOverseesAgentSalary.php">
+                            <button type="submit" class="btn btn-light m-4" name = "AgentSalary">Find the average salary agents make as their rating increases, and who have a rating higher than 2.9</button>
+                        </form>
+                        <form method="POST" action="propertyOverseesAgentMostNumber.php">
+                            <button type="submit" class="btn btn-light m-4" name = "AgentMostNumber">Find the agent with the most number of properties they oversee</button>
                         </form>
                 </div>
