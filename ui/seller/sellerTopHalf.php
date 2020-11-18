@@ -33,24 +33,24 @@
                               <option value="Agent">Agent</option>
                               <option value="Customer">Customer</option>
                          </select>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../agent/agentView.php">Agent Represents</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../amenity/amenityView.php">Amenity</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../apartments/apartmentView.php">Apartments</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../appoints/appointsView.php">Appoints</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../branch/branchView.php">Branch</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../branchLocation/branchLocationView.php">Branch Location</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../buyer/buyerView.php">Buyer</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../employs/employsView.php">Employs</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../house/houseView.php">House</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../lawyer/lawyerView.php">Lawyer</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../movers/moversView.php">Movers</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../pricing/pricingView.php">Pricing</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../property/propertyView.php">Property</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../propertyInfo/propertyInfoView.php">PropertyInfo</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../propertyOversees/propertyOverseesView.php">PropertyOversees </a></li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../provides/providesView.php">Provides</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../seller/sellerView.php">Seller</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "../wants/wantsView.php">Wants</a> </li>   
+                        <li class = "nav-item" id = "agentT"> <a class = "nav-link mb-2 text-muted" href = "../agent/agentView.php">Agent Represents</a> </li>
+                        <li class = "nav-item" id = "amenityT"> <a class = "nav-link mb-2 text-muted" href = "../amenity/amenityView.php">Amenity</a> </li>
+                        <li class = "nav-item" id = "apartmentsT"> <a class = "nav-link mb-2 text-muted" href = "../apartments/apartmentView.php">Apartments</a> </li>
+                        <li class = "nav-item" id = "appointsT"> <a class = "nav-link mb-2 text-muted" href = "../appoints/appointsView.php">Appoints</a> </li>
+                        <li class = "nav-item" id = "branchT"> <a class = "nav-link mb-2 text-muted" href = "../branch/branchView.php">Branch</a> </li>
+                        <li class = "nav-item" id = "branchT"> <a class = "nav-link mb-2 text-muted" href = "../branchLocation/branchLocationView.php">Branch Location</a> </li>
+                        <li class = "nav-item" id = "buyerT"> <a class = "nav-link mb-2 text-muted" href = "../buyer/buyerView.php">Buyer</a> </li>
+                        <li class = "nav-item" id = "employsT"> <a class = "nav-link mb-2 text-muted" href = "../employs/employsView.php">Employs</a> </li>
+                        <li class = "nav-item" id = "houseT"> <a class = "nav-link mb-2 text-muted" href = "../house/houseView.php">House</a> </li>
+                        <li class = "nav-item" id = "lawyerT"> <a class = "nav-link mb-2 text-muted" href = "../lawyer/lawyerView.php">Lawyer</a> </li>
+                        <li class = "nav-item" id = "moversT"> <a class = "nav-link mb-2 text-muted" href = "../movers/moversView.php">Movers</a> </li>
+                        <li class = "nav-item" id = "pricingT"> <a class = "nav-link mb-2 text-muted" href = "../pricing/pricingView.php">Pricing</a> </li>
+                        <li class = "nav-item" id = "propertyT"> <a class = "nav-link mb-2 text-muted" href = "../property/propertyView.php">Property</a> </li>
+                        <li class = "nav-item" id = "propertyInfoT"> <a class = "nav-link mb-2 text-muted" href = "../propertyInfo/propertyInfoView.php">PropertyInfo</a> </li>
+                        <li class = "nav-item" id = "propertyOverseesT"> <a class = "nav-link mb-2 text-muted" href = "../propertyOversees/propertyOverseesView.php">PropertyOversees </a></li>
+                        <li class = "nav-item" id = "providesT"> <a class = "nav-link mb-2 text-muted" href = "../provides/providesView.php">Provides</a> </li>
+                        <li class = "nav-item" id = "sellerT"> <a class = "nav-link mb-2 text-muted" href = "../seller/sellerView.php">Seller</a> </li>
+                        <li class = "nav-item" id = "wantsT"> <a class = "nav-link mb-2 text-muted" href = "../wants/wantsView.php">Wants</a> </li>   
                     </ul>
                 </div>
             </nav>
