@@ -18,7 +18,7 @@ function executePlainSQL($cmdstr) { //takes a plain (no bound variables) SQL com
     //echo "<br>running ".$cmdstr."<br>";
     global $db_conn, $success;
 
-    $statement = OCIParse($db_conn, $cmdstr); 
+    $statement = OCIParse($db_conn, $cmdstr);
     //There are a set of comments at the end of the file that describe some of the OCI specific functions and how they work
 
     if (!$statement) {
@@ -43,7 +43,7 @@ function executePlainSQL($cmdstr) { //takes a plain (no bound variables) SQL com
 function executeBoundSQL($cmdstr, $list) {
     /* Sometimes the same statement will be executed several times with different values for the variables involved in the query.
 In this case you don't need to create the statement several times. Bound variables cause a statement to only be
-parsed once and you can reuse the statement. This is also very useful in protecting against SQL injection. 
+parsed once and you can reuse the statement. This is also very useful in protecting against SQL injection.
 See the sample code below for how this function is used */
 
     global $db_conn, $success;
@@ -83,14 +83,14 @@ function printResult($result) { //prints results from a select statement
 
 function printResultProject($result) { //prints results from a select statement
     while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
-          echo "<tr>" . "<td>". $row[0]."</td> </tr>";
+          echo "<tr>" . "<td>" . $row[0] . "</td> <td>" . $row[1] . "</td> <td>" . $row[2] . "</td> <td>" . $row[3] . "</td> </tr>";
     }
 }
 
 function connectToDB() {
     global $db_conn;
 
-    // Your username is ora_(CWL_ID) and the password is a(student number). For example, 
+    // Your username is ora_(CWL_ID) and the password is a(student number). For example,
     // ora_platypus is the username and a12345678 is the password.
     $db_conn = OCILogon("ora_phillngs", "a18569673", "dbhost.students.cs.ubc.ca:1522/stu");
 
@@ -126,17 +126,17 @@ function handleUpdateRequest() {
     $salary = $_POST['salary'];
     $query = "UPDATE agentRepresents SET";
     //
-    if ($lawyerID != "") { 
+    if ($lawyerID != "") {
         $query = $query . " lawyerID='".$lawyerID."'";
-    } else if ($phone != "") { 
+    } else if ($phone != "") {
         $query = $query .  " phone='".$phone."'";
-    } else if ($email != ""){ 
+    } else if ($email != ""){
         $query = $query .  " email='".$email."'";
-    } else if ($rating != "") { 
+    } else if ($rating != "") {
         $query = $query .  " rating='".$rating."'";
-    } else if ($salary != ""){ 
+    } else if ($salary != ""){
         $query = $query .  " salary='".$salary."'";
-    } 
+    }
     $query = $query .  " WHERE agentID='" . $agentID . "'";
 
 
@@ -228,8 +228,8 @@ function handleDeleteRequest() {
     $agentID = $_POST['agentid'];
 
     $query = "DELETE FROM agentRepresents WHERE agentID='" . $agentID . "'";
+    echo $query;
     executePlainSQL($query);
-    executePlainSQL("commit");
 
 }
 
@@ -250,7 +250,7 @@ function handlePOSTRequest() {
             // echo "delete tuple\n";
             handleDeleteRequest();
         }
-        
+
         disconnectFromDB();
     }
 }
@@ -262,7 +262,6 @@ function handleGETRequest() {
         if (array_key_exists('countTuples', $_GET)) {
             handleCountRequest();
         }
-
         disconnectFromDB();
     }
 }
@@ -273,7 +272,7 @@ if (isset($_POST['select']) || isset($_POST['insert']) || isset($_POST['update']
     handleGETRequest();
 } else if (isset($_POST['project'])) {
    if(connectToDB()) {
-           $result = executePlainSQL("select email from agentRepresents");
+           $result = executePlainSQL("select agentID, email, phone from agentRepresents");
            printResultProject($result);
        }
  }
@@ -282,6 +281,5 @@ if (isset($_POST['select']) || isset($_POST['insert']) || isset($_POST['update']
         $result = executePlainSQL("select * from agentRepresents");
         printResult($result);
     }
-
 }
 ?>

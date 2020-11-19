@@ -18,7 +18,7 @@ function executePlainSQL($cmdstr) { //takes a plain (no bound variables) SQL com
     //echo "<br>running ".$cmdstr."<br>";
     global $db_conn, $success;
 
-    $statement = OCIParse($db_conn, $cmdstr); 
+    $statement = OCIParse($db_conn, $cmdstr);
     //There are a set of comments at the end of the file that describe some of the OCI specific functions and how they work
 
     if (!$statement) {
@@ -43,7 +43,7 @@ function executePlainSQL($cmdstr) { //takes a plain (no bound variables) SQL com
 function executeBoundSQL($cmdstr, $list) {
     /* Sometimes the same statement will be executed several times with different values for the variables involved in the query.
 In this case you don't need to create the statement several times. Bound variables cause a statement to only be
-parsed once and you can reuse the statement. This is also very useful in protecting against SQL injection. 
+parsed once and you can reuse the statement. This is also very useful in protecting against SQL injection.
 See the sample code below for how this function is used */
 
     global $db_conn, $success;
@@ -77,14 +77,14 @@ See the sample code below for how this function is used */
 
 function printResult($result) { //prints results from a select statement
     while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
-          echo "<tr>" . "<td>" . $row[0] . "</td> <td>" . $row[1] . "</td> <td>" . $row[2] . "</td> <td>" . $row[3] . "</td> </tr>";; //or just use "echo $row[0]" 
+          echo "<tr>" . "<td>" . $row[0] . "</td> <td>" . $row[1] . "</td> <td>" . $row[2] . "</td> <td>" . $row[3] . "</td> </tr>";; //or just use "echo $row[0]"
     }
 }
 
 function connectToDB() {
     global $db_conn;
 
-    // Your username is ora_(CWL_ID) and the password is a(student number). For example, 
+    // Your username is ora_(CWL_ID) and the password is a(student number). For example,
     // ora_platypus is the username and a12345678 is the password.
     $db_conn = OCILogon("ora_phillngs", "a18569673", "dbhost.students.cs.ubc.ca:1522/stu");
 
@@ -118,15 +118,15 @@ function handleUpdateRequest() {
     $agentid = $_POST['agentid'];
     $query = "UPDATE propertyoversees SET";
     //
-    if ($sellerid != "") { 
+    if ($sellerid != "") {
         $query = $query . " sellerid='".$sellerid."'";
-    } else if ($buyerid != "") { 
+    } else if ($buyerid != "") {
         $query = $query .  " buyerid='".$buyerid."'";
-    } else if ($agentid != ""){ 
+    } else if ($agentid != ""){
         $query = $query .  " agentid='".$agentid."'";
-    } 
-    
-    
+    }
+
+
     $query = $query .  " WHERE propertyid='" . $propertyid . "'";
 
 
@@ -202,7 +202,7 @@ function handleSelectRequest() {
         $selectComparison = $_POST['comparison'];
         if($selectComparison == "0") {
             $query = $query .  " = ";
-        } 
+        }
     }
 
     $query = $query . " $variable ";
@@ -216,8 +216,8 @@ function handleDeleteRequest() {
     $propertyID = $_POST['propertyid'];
 
     $query = "DELETE FROM propertyOversees WHERE propertyID='" . $propertyID . "'";
+    echo $query;
     executePlainSQL($query);
-    executePlainSQL("commit");
 
 }
 
@@ -238,7 +238,7 @@ function handlePOSTRequest() {
             // echo "delete tuple\n";
             handleDeleteRequest();
         }
-        
+
         disconnectFromDB();
     }
 }
@@ -271,14 +271,15 @@ if (isset($_POST['select']) || isset($_POST['insert']) || isset($_POST['update']
                                            GROUP BY b.buyerID, b.fullName");
         printResult($result);
      }
-} else if (isset($_POST['AgentSalary'])) {
+} else if (isset($_POST['ratingMore'])) {
       if(connectToDB()) {
-         $result = executePlainSQL("SELECT ar.rating, AVG(ar.salary) AS salary
+         $rating = $_POST['Rating'];
+           $result = executePlainSQL("SELECT ar.rating, AVG(ar.salary) AS salary
                                             FROM PropertyOversees po, AgentRepresents ar
                                             WHERE po.agentID = ar.AgentID
                                             GROUP BY ar.rating
-                                            HAVING ar.rating > 2.9");
-         printResult($result);
+                                            HAVING ar.rating > $rating ");
+           printResult($result);
       }
 } else if (isset($_POST['AgentMostNumber'])) {
         if(connectToDB()) {
@@ -300,8 +301,10 @@ if (isset($_POST['select']) || isset($_POST['insert']) || isset($_POST['update']
     handleGETRequest();
 } else {
     if(connectToDB()) {
-        $result = executePlainSQL("select * from propertyOversees");
+        if(isset($_POST['view'])) {
+           $result = executePlainSQL("select * from propertyOversees");
         printResult($result);
+        }
     }
 
 }

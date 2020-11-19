@@ -13,10 +13,10 @@
     </head>
 
 
-     <body onload="doStuff2()">
+     <body onload="doStuff3()">
 
     <nav class = "navbar navbar-dark sticky-top bg-dark flex-mid-nowrap p-0 shadow">
-        <a href = "index.php"> <h1 class = "display-3 m-4 text-light">Real Estate</h1> </a>
+        <a href = "../index.php" id = "Reset"> <h1 class = "display-3 m-4 text-light">Real Estate</h1> </a>
     </nav>
         
         
@@ -33,7 +33,7 @@
                               <option value="Agent">Agent</option>
                               <option value="Customer">Customer</option>
                          </select>
-                        <li class = "nav-item" id = "agentT"> <a class = "nav-link mb-2 text-muted" href = "../agent/agentView.php">Agent Represents</a> </li>
+                        <li class = "nav-item" id = "agentT"> <a class = "nav-link mb-2 text-muted" id = "agentLink" href = "../agent/agentView.php">Agent Represents</a> </li>
                         <li class = "nav-item" id = "amenityT"> <a class = "nav-link mb-2 text-muted" href = "../amenity/amenityView.php">Amenity</a> </li>
                         <li class = "nav-item" id = "apartmentsT"> <a class = "nav-link mb-2 text-muted" href = "../apartments/apartmentView.php">Apartments</a> </li>
                         <li class = "nav-item" id = "appointsT"> <a class = "nav-link mb-2 text-muted" href = "../appoints/appointsView.php">Appoints</a> </li>

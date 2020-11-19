@@ -3,104 +3,299 @@
 <div class="jumbotron">
   <h1 class="display-4">Welcome!</h1>
   <p class="lead">Real estate database for you!</p>
+<!--
+    <form method="POST" action="index.php">              
+            <button type="submit" class="btn btn-light m-2" name = "clear" >Clear Database</button>
+    </form>
+    <form method="POST" action="index.php">
+            <button type="submit" class="btn btn-light m-1" name = "populate" >Populate Database</button>
+    </form>
+-->
 </div>
 
-<!--
-<form method="POST">
-     if you want another page to load after the button is clicked, you have to specify that page in the action parameter 
-    <input type="hidden" id="resetTablesRequest" name="resetTablesRequest">
-    <p><input type="submit" value="Start" name="reset"></p>
-</form>
--->
-<!--
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>
-            GETTING STARTED WITH BRACKETS
-        </title>
-        <meta name="description" content="An interactive getting started guide for Brackets.">
-        <link rel="stylesheet" href="main.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="styling.js"> </script>
-         <button type="button" onclick="hiddenDiv('programming language');" id="skills_submit">Programming Language</button>
+                    <?php
+                    //this tells the system that it's no longer just parsing html; it's now parsing PHP
+//
+//                    $success = True; //keep track of errors so it redirects the page only if there are no errors
+//                    $db_conn = NULL; // edit the login credentials in connectToDB()
+//                    $show_debug_alert_messages = False; // set to True if you want alerts to show you which methods are being triggered (see how it is used in debugAlertMessage())
+//
+//                    function debugAlertMessage($message) {
+//                        global $show_debug_alert_messages;
+//
+//                        if ($show_debug_alert_messages) {
+//                            echo "<script type='text/javascript'>alert('" . $message . "');</script>";
+//                        }
+//                    }
+//
+//                    function executePlainSQL($cmdstr) { //takes a plain (no bound variables) SQL command and executes it
+//                        //echo "<br>running ".$cmdstr."<br>";
+//                        global $db_conn, $success;
+//
+//                        $statement = OCIParse($db_conn, $cmdstr); 
+//                        //There are a set of comments at the end of the file that describe some of the OCI specific functions and how they work
+//
+//                        if (!$statement) {
+//                            echo "<br>Cannot parse the following command: " . $cmdstr . "<br>";
+//                            $e = OCI_Error($db_conn); // For OCIParse errors pass the connection handle
+//                            echo htmlentities($e['message']);
+//                            $success = False;
+//                        }
+//
+//                        $r = OCIExecute($statement, OCI_DEFAULT);
+//                        if (!$r) {
+//                            echo "<br>Cannot execute the following command: " . $cmdstr . "<br>";
+//                            $e = oci_error($statement); // For OCIExecute errors pass the statementhandle
+//                            echo htmlentities($e['message']);
+//                            $success = False;
+//                        }
+//
+//                        // echo $statement . "WHAT IN THE";
+//                        return $statement;
+//                    }
+//
+//                    function executeBoundSQL($cmdstr, $list) {
+//                        /* Sometimes the same statement will be executed several times with different values for the variables involved in the query.
+//                    In this case you don't need to create the statement several times. Bound variables cause a statement to only be
+//                    parsed once and you can reuse the statement. This is also very useful in protecting against SQL injection. 
+//                    See the sample code below for how this function is used */
+//
+//                        global $db_conn, $success;
+//                        $statement = OCIParse($db_conn, $cmdstr);
+//
+//                        if (!$statement) {
+//                            echo "<br>Cannot parse the following command: " . $cmdstr . "<br>";
+//                            $e = OCI_Error($db_conn);
+//                            echo htmlentities($e['message']);
+//                            $success = False;
+//                        }
+//
+//                        foreach ($list as $tuple) {
+//                            foreach ($tuple as $bind => $val) {
+//                                //echo $val;
+//                                //echo "<br>".$bind."<br>";
+//                                OCIBindByName($statement, $bind, $val);
+//                                unset ($val); //make sure you do not remove this. Otherwise $val will remain in an array object wrapper which will not be recognized by Oracle as a proper datatype
+//                            }
+//
+//                            $r = OCIExecute($statement, OCI_DEFAULT);
+//                            if (!$r) {
+//                                echo "<br> Cannot execute the following command: " . $cmdstr . "<br>";
+//                                $e = OCI_Error($statement); // For OCIExecute errors, pass the statementhandle
+//                                echo htmlentities($e['message']);
+//                                echo "<br>";
+//                                $success = False;
+//                            }
+//                        }
+//                    }
+//
+//                    function printResult($result) { //prints results from a select statement
+//                        while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
+//                              echo "<tr>" . "<td>" . $row[0] . "</td> <td>" . $row[1] . "</td> <td>" . $row[2] . "</td> </tr>";; //or just use "echo $row[0]" 
+//                        }
+//                    }
+//
+//                    function connectToDB() {
+//                        global $db_conn;
+//
+//                        // Your username is ora_(CWL_ID) and the password is a(student number). For example, 
+//                        // ora_platypus is the username and a12345678 is the password.
+//                        $db_conn = OCILogon("ora_phillngs", "a18569673", "dbhost.students.cs.ubc.ca:1522/stu");
+//
+//                        if ($db_conn) {
+//                            debugAlertMessage("Database is Connected");
+//                            return true;
+//                        } else {
+//                            debugAlertMessage("Cannot connect to Database");
+//                            $e = OCI_Error(); // For OCILogon errors pass no handle
+//                            echo htmlentities($e['message']);
+//                            return false;
+//                        }
+//                    }
+//
+//                    function disconnectFromDB() {
+//                        global $db_conn;
+//
+//                        debugAlertMessage("Disconnect from Database");
+//                        OCILogoff($db_conn);
+//                    }
+//
+//                    function handleUpdateRequest() {
+//                        global $db_conn;
+//
+//                        // $old_name = $_POST['oldName'];
+//                        // $new_name = $_POST['newName'];
+//                        
+//                        $moverid = $_POST['moverid'];
+//                        $rating = $_POST['rating'];
+//                        $price = $_POST['price'];
+//
+//                        $query = "UPDATE movers SET";
+//                        //
+//                        if ($rating != "") { 
+//                            $query = $query . " rating='".$rating."'";
+//                        } else if ($price != "") { 
+//                            $query = $query .  " price='".$price."'";
+//                        } 
+//                        
+//                        $query = $query .  " WHERE moverid='" . $moverid . "'";
+//
+//
+//                        echo $query;
+//                        // you need the wrap the old name and new name values with single quotations
+//                        // executePlainSQL("UPDATE movers SET name='" . $new_name . "' WHERE name='" . $old_name . "'");
+//                        executePlainSQL($query);
+//                        OCICommit($db_conn);
+//                    }
+//
+//                    function handleResetRequest() {
+//                        global $db_conn;
+//                        // Drop old table
+//                        executePlainSQL("DROP TABLE demoTable");
+//
+//                        // Create new table
+//                        echo "<br> creating new table <br>";
+//                        executePlainSQL("CREATE TABLE demoTable (id int PRIMARY KEY, name char(30))");
+//                        OCICommit($db_conn);
+//                    }
+//
+//                    function handleInsertRequest() {
+//                        global $db_conn;
+//
+//                        //Getting the values from user and insert data into the table
+//                        $tuple = array (
+//                            ":bind1" => $_POST['rating'],
+//                            ":bind2" => $_POST['moverid'],
+//                            ":bind3" => $_POST['price'],
+//                        );
+//
+//                        // echo  $_POST['agentid'] . $_POST['lawyerid'] .$_POST['phone'] .$_POST['email'] . $_POST['rating'] . $_POST['salary'];
+//
+//                        $alltuples = array (
+//                            $tuple
+//                        );
+//
+//                        executeBoundSQL("insert into movers values (:bind1, :bind2, :bind3)", $alltuples);
+//                        OCICommit($db_conn);
+//                    }
+//
+//                    function handleCountRequest() {
+//                        global $db_conn;
+//
+//                        $result = executePlainSQL("SELECT Count(*) FROM demoTable");
+//
+//                        if (($row = oci_fetch_row($result)) != false) {
+//                            echo "<br> The number of tuples in demoTable: " . $row[0] . "<br>";
+//                        }
+//                    }
+//
+//                    function handleSelectRequest() {
+//                        global $db_conn;
+//
+//                        $variable = $_POST['value'];
+//                        $query = "SELECT moverid, rating, price FROM movers WHERE" ;
+//
+//                        if(isset($_POST['attribute'])){
+//                            $selectAttribute = $_POST['attribute'];
+//                            if($selectAttribute == "0") {
+//                                $query = $query .  " price ";
+//                            } else if ($selectAttribute == "1") {
+//                                $query = $query . " rating ";
+//                            }
+//                        }
+//
+//                        if(isset($_POST['comparison'])){
+//                            $selectComparison = $_POST['comparison'];
+//                            if($selectComparison == "0") {
+//                                $query = $query .  " > ";
+//                            } else if ($selectComparison == "1") {
+//                                $query = $query . " < ";
+//                            } else if ($selectComparison == "2") {
+//                                $query = $query . " = ";
+//                            }
+//                        }
+//
+//                        $query = $query . " $variable ";
+//                        $result = executePlainSQL($query);
+//                        printResult($result);
+//                    }
+//
+//                    function handleDeleteRequest() {
+//                        global $db_conn;
+//
+//                        $moverID = $_POST['moversid'];
+//
+//                        $query = "DELETE FROM movers WHERE moverid='" . $moverID . "'";
+//                        executePlainSQL($query);
+//                        executePlainSQL("commit");
+//
+//                    }
+//
+//                    // HANDLE ALL POST ROUTES
+//                    // A better coding practice is to have one method that reroutes your requests accordingly. It will make it easier to add/remove functionality.
+//                    function handlePOSTRequest() {
+//                        if (connectToDB()) {
+//                            if (array_key_exists('selectTupleRequest', $_POST)) {
+//                                // echo "select tuple\n";
+//                                handleSelectRequest();
+//                            } else if (array_key_exists('insertTupleRequest', $_POST)) {
+//                                // echo "insert tuple";
+//                                handleInsertRequest();
+//                            } else if (array_key_exists('updateTupleRequest', $_POST)) {
+//                                // echo "update tuple\n";
+//                                handleUpdateRequest();
+//                            } else if (array_key_exists('deleteTupleRequest', $_POST)) {
+//                                // echo "delete tuple\n";
+//                                handleDeleteRequest();
+//                            }
+//                            
+//                            disconnectFromDB();
+//                        }
+//                    }
+//
+//                    // HANDLE ALL GET ROUTES
+//                    // A better coding practice is to have one method that reroutes your requests accordingly. It will make it easier to add/remove functionality.
+//                    function handleGETRequest() {
+//                        if (connectToDB()) {
+//                            if (array_key_exists('countTuples', $_GET)) {
+//                                handleCountRequest();
+//                            }
+//
+//                            disconnectFromDB();
+//                        }
+//                    }
+//
+//                    function handleClearRequest() {                
+//                        if (connectToDB()) {                         
+//                            global $db_conn;       
+//                            $query = "start Statements.sql"; 
+//                            echo $query;
+//                            executePlainSQL($query);
+//                            disconnectFromDB();
+//                        }
+//                    }
+//
+//                    function handlePopulateRequest() {                
+//                        if (connectToDB()) {                         
+//                            global $db_conn;       
+//                            $query = "start Insertion.sql"; 
+//                            echo $query;
+//                            executePlainSQL($query);
+//                            disconnectFromDB();
+//                        }
+//                    }
+//
+//                    if (isset($_POST['populate'])) {
+//                        handlePopulateRequest();
+//                    } else if (isset($_POST['clear'])) {
+//                        handleClearRequest();
+//                    } 
+//
 
-        function hiddenDiv(val) {    
-            document.getElementById('to-hide').style.display = 'none';    
-            if (val === "programming language") {        
-                if (!pl){            
-                    console.log(1);            
-                    document.getElementById('hidden_div1').style.display = 'block';            
-                    document.getElementById('hidden_div2').style.display = 'none';            
-                    document.getElementById('hidden_div3').style.display = 'none';            
-                    document.getElementById('hidden_div4').style.display = 'none';            
-                    pl = true;            
-                    dm = false;            
-                    ide = false;            
-                    lang = false;      
-                }       
-                else {
-                    document.getElementById('hidden_div1').style.display = 'none';            
-                    document.getElementById('to-hide').style.display = 'block';            
-                    pl = false;        
-                }    
-            } 
-        }
-
-        FOR HIDING /buTTONS WHEN DIFFERENT USER IS SELECTEd 
-    </head>
-    <body>
-
-    <nav class = "navbar navbar-dark sticky-top bg-dark flex-mid-nowrap p-0 shadow">
-        <a href = "index.php"> <h1 class = "display-3 m-4 text-light">Real Estate</h1> </a>
-    </nav>
-        
-        
-        
-    <div class = "container-fluid">
-    
-        <div class = "row">
-            
-            <nav id = "sidebarMenu" class = "col-md-3 d-md-block bg-light" >
-                <div class = "sidebar-sticky pt-3">
-                        <ul class = "nav flex-column mb-2"> 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Privilege 
-                            </a>
-                            <select name="dropdown-menu" id="dropdown-menu" onchange="doIt()" >
-                                <option value="Manager">Manager</option>
-                                <option value="Agent">Agent</option>
-                                <option value="Customer">Customer</option>
-                            </select>
-                        </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "agent/agentView.php">Agent Represents</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "amenity/amenityView.php">Amenity</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "apartments/apartmentView.php">Appartments</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "appoints/appointsView.php">Appoints</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "branch/branchViews.pgh">Branch</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "branchLocation/branchLocation.php">Branch Location</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "buyer/buyerView.php">Buyer</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "employs/employsView.php">Employs</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "house/houseView.php">House</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "lawyer/lawyerView.php">Lawyer</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "movers/moversView.php">Movers</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "pricing/pricingView.php">Pricing</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "property/propertyView.php">Property</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "propertyInfo/propertyInfoView.php">PropertyInfo</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "propertyOversees/propertyOverseesView.php">PropertyOversees </a></li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "provides/providesView.php">Provides</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "seller/sellerView.php">Seller</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "wants/wantsView.php">Wants</a> </li>  
-                    </ul>
-                </div>
-            </nav>
--->
+                    ?> 
             
             <main role = "main" class = "col-md-9 ml-sm-auto px-md-4">
+
           
             </main>            
         </div>

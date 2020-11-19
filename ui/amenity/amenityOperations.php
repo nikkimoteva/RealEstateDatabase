@@ -110,7 +110,7 @@ function disconnectFromDB() {
 function printResultAmenity () {
  global $db_conn;
  $price = $_POST['Price'];
- $query =  "select aType from amenity a, property p, propertyInfo info where p.propertyID = a.propertyID AND p.address = info.address AND info.listedPrice < " . $price;
+ $query =  "select aType from amenity a, property p, propertyInfo info where p.propertyID = a.propertyID AND p.address = info.address AND info.listedPrice > " . $price;
  // echo $query;
  $result = executePlainSQL($query);
  printResult($result);
@@ -265,6 +265,5 @@ else {
         $result = executePlainSQL("select * from amenity");
         printResult($result);
     }
-
 }
 ?>

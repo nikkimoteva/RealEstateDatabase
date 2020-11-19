@@ -12,6 +12,64 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="styling.js"> </script>
+        <script type="text/javascript">
+            function doIt() {
+               var privilegeType = document.getElementsByName("dropdown-menu")[0].value;
+               var linkAgent = document.getElementById("agentLink");
+               localStorage.setItem('label', privilegeType);
+               localStorage.setItem("setYet", "0");
+                if(privilegeType == "Agent") {
+                   document.getElementById("agentT").style.display = "none";
+                }
+
+                if("Customer" == privilegeType) {
+                    linkAgent.setAttribute('href', 'agent/agentProject.php');
+                    document.getElementById("agentT").style.display = "block";
+                    document.getElementById("buyerT").style.display = "none";
+                    document.getElementById("sellerT").style.display = "none";
+                    document.getElementById("wantsT").style.display = "none";
+                    document.getElementById("propertyOverseesT").style.display = "none";
+                }
+                if("Manager" == privilegeType) {
+                    linkAgent.setAttribute('href', 'agent/agentView.php');
+                    document.getElementById("agentT").style.display = "block";
+                    document.getElementById("buyerT").style.display = "block";
+                    document.getElementById("sellerT").style.display = "block";
+                    document.getElementById("wantsT").style.display = "block";
+                    document.getElementById("propertyOverseesT").style.display = "block";
+                }
+            }
+             function  doStuff2() {
+                localStorage.setItem("setYet", "0");
+                var privilegeType = localStorage.getItem('label');
+                document.getElementById("dropdown-menu").value = privilegeType;
+                var linkAgent = document.getElementById("agentLink");
+                if(privilegeType == "Agent") {
+                   document.getElementById("agentT").style.display = "none";
+                   document.getElementById("buyerT").style.display = "block";
+                   document.getElementById("sellerT").style.display = "block";
+                   document.getElementById("wantsT").style.display = "block";
+                   document.getElementById("propertyOverseesT").style.display = "block";
+                }
+
+                if("Customer" == privilegeType) {
+                    linkAgent.setAttribute('href', 'agent/agentProject.php');
+                    document.getElementById("agentT").style.display = "block";
+                    document.getElementById("buyerT").style.display = "none";
+                    document.getElementById("sellerT").style.display = "none";
+                    document.getElementById("wantsT").style.display = "none";
+                    document.getElementById("propertyOverseesT").style.display = "none";
+                }
+                if("Manager" == privilegeType) {
+                    linkAgent.setAttribute('href', 'agent/agentView.php');
+                    document.getElementById("agentT").style.display = "block";
+                    document.getElementById("buyerT").style.display = "block";
+                    document.getElementById("sellerT").style.display = "block";
+                    document.getElementById("wantsT").style.display = "block";
+                    document.getElementById("propertyOverseesT").style.display = "block";
+                }
+            }
+        </script>
         <!-- <button type="button" onclick="hiddenDiv('programming language');" id="skills_submit">Programming Language</button>
 
         function hiddenDiv(val) {    
@@ -38,10 +96,10 @@
 
         FOR HIDING /buTTONS WHEN DIFFERENT USER IS SELECTEd -->
     </head>
-    <body>
+    <body onload = "doStuff2()">
 
     <nav class = "navbar navbar-dark sticky-top bg-dark flex-mid-nowrap p-0 shadow">
-        <a href = "index.php"> <h1 class = "display-3 m-4 text-light">Real Estate</h1> </a>
+        <a href = "index.php" id = "Reset"> <h1 class = "display-3 m-4 text-light">Real Estate</h1> </a>
     </nav>
         
         
@@ -58,24 +116,24 @@
                               <option value="Agent">Agent</option>
                               <option value="Customer">Customer</option>
                          </select>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "agent/agentView.php">Agent Represents</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "amenity/amenityView.php">Amenity</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "apartments/apartmentView.php">Apartments</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "appoints/appointsView.php">Appoints</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "branch/branchView.php">Branch</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "branchLocation/branchLocationView.php">Branch Location</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "buyer/buyerView.php">Buyer</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "employs/employsView.php">Employs</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "house/houseView.php">House</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "lawyer/lawyerView.php">Lawyer</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "movers/moversView.php">Movers</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "pricing/pricingView.php">Pricing</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "property/propertyView.php">Property</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "propertyInfo/propertyInfoView.php">PropertyInfo</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "propertyOversees/propertyOverseesView.php">PropertyOversees </a></li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "provides/providesView.php">Provides</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "seller/sellerView.php">Seller</a> </li>
-                        <li class = "nav-item"> <a class = "nav-link mb-2 text-muted" href = "wants/wantsView.php">Wants</a> </li>  
+                        <li class = "nav-item" id = "agentT"> <a class = "nav-link mb-2 text-muted" id = "agentLink" >Agent Represents</a> </li>
+                            <li class = "nav-item" id = "amenityT"> <a class = "nav-link mb-2 text-muted" href = "amenity/amenityView.php">Amenity</a> </li>
+                            <li class = "nav-item" id = "apartmentsT"> <a class = "nav-link mb-2 text-muted" href = "apartments/apartmentView.php">Appartments</a> </li>
+                            <li class = "nav-item" id = "appointsT" > <a class = "nav-link mb-2 text-muted" href = "appoints/appointsView.php">Appoints</a> </li>
+                            <li class = "nav-item" id = "branchT" > <a class = "nav-link mb-2 text-muted" href = "branch/branchView.php">Branch</a> </li>
+                            <li class = "nav-item" id = "branchLocationT"> <a class = "nav-link mb-2 text-muted" href = "branchLocation/branchLocation.php">Branch Location</a> </li>
+                            <li class = "nav-item" id = "buyerT" > <a class = "nav-link mb-2 text-muted" href = "buyer/buyerView.php">Buyer</a> </li>
+                            <li class = "nav-item" id = "employsT" > <a class = "nav-link mb-2 text-muted" href = "employs/employsView.php">Employs</a> </li>
+                            <li class = "nav-item" id = "houseT" > <a class = "nav-link mb-2 text-muted" href = "house/houseView.php">House</a> </li>
+                            <li class = "nav-item" id = "lawyerT" > <a class = "nav-link mb-2 text-muted" href = "lawyer/lawyerView.php">Lawyer</a> </li>
+                            <li class = "nav-item" id = "moversT" > <a class = "nav-link mb-2 text-muted" href = "movers/moversView.php">Movers</a> </li>
+                            <li class = "nav-item" id = "pricingT"> <a class = "nav-link mb-2 text-muted" href = "pricing/pricingView.php">Pricing</a> </li>
+                            <li class = "nav-item" id = "propertyT"> <a class = "nav-link mb-2 text-muted" href = "property/propertyView.php">Property</a> </li>
+                            <li class = "nav-item" id = "propertyInfoT"> <a class = "nav-link mb-2 text-muted" href = "propertyInfo/propertyInfoView.php">PropertyInfo</a> </li>
+                            <li class = "nav-item" id = "propertyOverseesT"> <a class = "nav-link mb-2 text-muted" href = "propertyOversees/propertyOverseesView.php">PropertyOversees </a></li>
+                            <li class = "nav-item" id = "providesT"> <a class = "nav-link mb-2 text-muted" href = "provides/providesView.php">Provides</a> </li>
+                            <li class = "nav-item" id = "sellerT"> <a class = "nav-link mb-2 text-muted" href = "seller/sellerView.php">Seller</a> </li>
+                            <li class = "nav-item" id = "wantsT"> <a class = "nav-link mb-2 text-muted" href = "wants/wantsView.php">Wants</a> </li>
                     </ul>
                 </div>
             </nav>

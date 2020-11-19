@@ -16,7 +16,7 @@
     <body onload = "doStuff2()">
 
     <nav class = "navbar navbar-dark sticky-top bg-dark flex-mid-nowrap p-0 shadow">
-        <a href = "../index.php"> <h1 class = "display-3 m-4 text-light">Real Estate</h1> </a>
+        <a href = "../index.php" id = "Reset"> <h1 class = "display-3 m-4 text-light">Real Estate</h1> </a>
     </nav>
     <div class = "container-fluid">
 
@@ -30,7 +30,7 @@
                               <option value="Agent">Agent</option>
                               <option value="Customer">Customer</option>
                          </select>
-                        <li class = "nav-item" id = "agentT"> <a class = "nav-link mb-2 text-muted" href = "../agent/agentView.php">Agent Represents</a> </li>
+                        <li class = "nav-item" id = "agentT"> <a class = "nav-link mb-2 text-muted" id = "agentLink" href = "../agent/agentView.php">Agent Represents</a> </li>
                         <li class = "nav-item" id = "amenityT"> <a class = "nav-link mb-2 text-muted" href = "../amenity/amenityView.php">Amenity</a> </li>
                         <li class = "nav-item" id = "apartmentsT"> <a class = "nav-link mb-2 text-muted" href = "../apartments/apartmentView.php">Apartments</a> </li>
                         <li class = "nav-item" id = "appointsT"> <a class = "nav-link mb-2 text-muted" href = "../appoints/appointsView.php">Appoints</a> </li>
@@ -71,13 +71,7 @@
                         <form method="POST" action="propertyOverseesView.php">
                             <button type="submit" class="btn btn-light m-4" name = "view">View</button>
                         </form>
-                        <form method="POST" action="propertyOverseesNoProperties.php">
-                            <button type="submit" class="btn btn-light m-4" name = "NO-PROP">Find buyers and number of properties they are interested in</button>
-                        </form>
-                        <form method="POST" action="propertyOverseesAgentSalary.php">
-                            <button type="submit" class="btn btn-light m-4" name = "AgentSalary">Find the average salary agents make as their rating increases, and who have a rating higher than 2.9</button>
-                        </form>
-                        <form method="POST" action="propertyOverseesAgentMostNumber.php">
-                            <button type="submit" class="btn btn-light m-4" name = "AgentMostNumber">Find the agent with the most number of properties they oversee</button>
+                        <form method="POST" action="propertyOverseesAgentMoreInfo.php">
+                            <button type="submit" class="btn btn-light m-4" name = "more info">More Info</button>
                         </form>
                 </div>

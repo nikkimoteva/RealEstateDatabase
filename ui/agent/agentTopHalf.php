@@ -9,14 +9,54 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="styling.js"> </script>
-        <script type="text/javascript" src="../privelageOptions.js"> </script>
+        <script type"text/javascript" >
+            function doIt() {
+               var privilegeType = document.getElementsByName("dropdown-menu")[0].value;
+               var resetToggle = document.getElementById("Reset");
+               localStorage.setItem('label', privilegeType);
+               document.getElementById("agentLink").setAttribute('href', 'agent/agentProject.php');
+               resetToggle.click();
+            }
+            function  doStuff2() {
+                var privelegeType = localStorage.getItem('label');
+                document.getElementById("dropdown-menu").value = privelegeType;
+                if(localStorage.getItem("setYet") == "1"){
+                return;
+                }
+                  if (privelegeType == "Customer") {
+                   document.getElementById("agentLink").setAttribute('href', '../agent/agentProject.php');
+                   document.getElementsByName("view")[0].style.display = "none";
+                   document.getElementsByName("select")[0].style.display = "none";
+                   document.getElementsByName("insert")[0].style.display = "none";
+                   document.getElementsByName("update")[0].style.display = "none";
+                   document.getElementsByName("delete")[0].style.display = "none";
+                   document.getElementById("buyerT").style.display = "none";
+                   document.getElementById("sellerT").style.display = "none";
+                   document.getElementById("wantsT").style.display = "none";
+                   document.getElementById("propertyOverseesT").style.display = "none";
+                   return;
+                }
+                else if(["Manager"].includes(privelegeType)) {
+                    document.getElementById("agentLink").setAttribute('href', '../agent/agentView.php')
+                    document.getElementsByName("insert")[0].style.display = "block";
+                    document.getElementsByName("update")[0].style.display = "block";
+                    document.getElementsByName("delete")[0].style.display = "block";
+                }
+                else if(["Agent"].includes(privelegeType)) {
+                    document.getElementsByName("insert")[0].style.display = "none";
+                    document.getElementsByName("update")[0].style.display = "none";
+                    document.getElementsByName("delete")[0].style.display = "none";
+                    document.getElementById("agentT").style.display = "none";
+                }
+            }
+        </script>
     </head>
 
 
     <body onload="doStuff2()">
 
     <nav class = "navbar navbar-dark sticky-top bg-dark flex-mid-nowrap p-0 shadow">
-        <a href = "../index.php"> <h1 class = "display-3 m-4 text-light">Real Estate</h1> </a>
+        <a href = "../index.php" id = "Reset"> <h1 class = "display-3 m-4 text-light">Real Estate</h1> </a>
     </nav>
         
         
@@ -33,12 +73,12 @@
                               <option value="Agent">Agent</option>
                               <option value="Customer">Customer</option>
                          </select>
-                        <li class = "nav-item" id = "agentT"> <a class = "nav-link mb-2 text-muted" href = "../agent/agentView.php">Agent Represents</a> </li>
+                        <li class = "nav-item" id = "agentT"> <a class = "nav-link mb-2 text-muted" id= "agentLink">Agent Represents</a> </li>
                         <li class = "nav-item" id = "amenityT"> <a class = "nav-link mb-2 text-muted" href = "../amenity/amenityView.php">Amenity</a> </li>
                         <li class = "nav-item" id = "apartmentsT"> <a class = "nav-link mb-2 text-muted" href = "../apartments/apartmentView.php">Apartments</a> </li>
                         <li class = "nav-item" id = "appointsT"> <a class = "nav-link mb-2 text-muted" href = "../appoints/appointsView.php">Appoints</a> </li>
                         <li class = "nav-item" id = "branchT"> <a class = "nav-link mb-2 text-muted" href = "../branch/branchView.php">Branch</a> </li>
-                        <li class = "nav-item" id = "branchT"> <a class = "nav-link mb-2 text-muted" href = "../branchLocation/branchLocationView.php">Branch Location</a> </li>
+                        <li class = "nav-item" id = "branchLocationT"> <a class = "nav-link mb-2 text-muted" href = "../branchLocation/branchLocationView.php">Branch Location</a> </li>
                         <li class = "nav-item" id = "buyerT"> <a class = "nav-link mb-2 text-muted" href = "../buyer/buyerView.php">Buyer</a> </li>
                         <li class = "nav-item" id = "employsT"> <a class = "nav-link mb-2 text-muted" href = "../employs/employsView.php">Employs</a> </li>
                         <li class = "nav-item" id = "houseT"> <a class = "nav-link mb-2 text-muted" href = "../house/houseView.php">House</a> </li>
@@ -77,6 +117,6 @@
                             <button type="submit" class="btn btn-light m-4" name = "view">View</button>
                         </form>
                         <form method="POST" action="agentProject.php">
-                            <button type="submit" class="btn btn-light m-4" name = "project">Show Emails</button>
+                            <button type="submit" class="btn btn-light m-4" name = "project">Show Agents Contact Info</button>
                        </form>
                 </div>
