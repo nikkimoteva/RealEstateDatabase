@@ -1,13 +1,14 @@
 <?php include('propertyOverseesTopHalf.php'); ?>
 
-<label for="exampleFormControlSelect1"> The agent with the most number of properties they oversee</label>
+<label for="exampleFormControlSelect1"></label>
 
 <div class = "table-reponsive">
                     <table class = "table table-stripedbordered table-m">
                         <thead class ="thead-dark">
                             <tr>
-                                <th>Agent ID</th>
-                                <th>Number of Properties they oversee</th>
+                          <form method="POST" action="propertyOverseesNoProperties.php">
+                                       <button type="submit" class="btn btn-light m-4" name = "NO-PROP">Find buyers and number of properties they are interested in</button>
+                           </form>
                             </tr>
                         </thead>
                         <tbody>

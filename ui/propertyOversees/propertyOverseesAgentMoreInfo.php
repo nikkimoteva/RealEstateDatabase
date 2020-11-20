@@ -1,6 +1,6 @@
 <?php include('propertyOverseesTopHalf.php'); ?>
 
-<label for="exampleFormControlSelect1">The agent with the most number of properties they oversee.</label>
+<label for="exampleFormControlSelect1"></label>
 
 <div class = "table-reponsive">
                     <table class = "table table-stripedbordered table-m">

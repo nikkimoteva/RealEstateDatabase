@@ -125,7 +125,7 @@ function handleUpdateRequest() {
     } else if ($salary != "") { 
         $query = $query .  " salary='".$salary."'";
     } else if ($budget != ""){ 
-        $query = $query .  " bubdget='".$budget."'";
+        $query = $query .  " budget='".$budget."'";
     } else if ($email != "") { 
         $query = $query .  " email='".$email."'";
     } else if ($phone != ""){ 

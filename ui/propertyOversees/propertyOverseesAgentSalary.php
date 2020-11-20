@@ -1,6 +1,6 @@
 <?php include('propertyOverseesTopHalf.php'); ?>
 
-<label for="exampleFormControlSelect1"> List of buyers and number of properties they are interested in.</label>
+<label for="exampleFormControlSelect1"> The average salary agents make as their rating increases, and who have a rating higher than</label>
 
 <div class = "table-reponsive">
                     <table class = "table table-stripedbordered table-m">
