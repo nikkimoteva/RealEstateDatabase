@@ -20,6 +20,8 @@
                localStorage.setItem("setYet", "0");
                 if(privilegeType == "Agent") {
                    document.getElementById("agentT").style.display = "none";
+                   document.getElementById("lawyerT").style.display = "block";
+                   document.getElementById("propertyOverseesT").style.display = "block";
                 }
 
                 if("Customer" == privilegeType) {
@@ -28,6 +30,7 @@
                     document.getElementById("buyerT").style.display = "none";
                     document.getElementById("sellerT").style.display = "none";
                     document.getElementById("wantsT").style.display = "none";
+                    document.getElementById("lawyerT").style.display = "none";
                     document.getElementById("propertyOverseesT").style.display = "none";
                 }
                 if("Manager" == privilegeType) {
@@ -36,6 +39,7 @@
                     document.getElementById("buyerT").style.display = "block";
                     document.getElementById("sellerT").style.display = "block";
                     document.getElementById("wantsT").style.display = "block";
+                      document.getElementById("lawyerT").style.display = "block";
                     document.getElementById("propertyOverseesT").style.display = "block";
                 }
             }
@@ -49,6 +53,7 @@
                    document.getElementById("buyerT").style.display = "block";
                    document.getElementById("sellerT").style.display = "block";
                    document.getElementById("wantsT").style.display = "block";
+                    document.getElementById("lawyerT").style.display = "block";
                    document.getElementById("propertyOverseesT").style.display = "block";
                 }
 
@@ -58,6 +63,7 @@
                     document.getElementById("buyerT").style.display = "none";
                     document.getElementById("sellerT").style.display = "none";
                     document.getElementById("wantsT").style.display = "none";
+                    document.getElementById("lawyerT").style.display = "none";
                     document.getElementById("propertyOverseesT").style.display = "none";
                 }
                 if("Manager" == privilegeType) {
@@ -66,32 +72,32 @@
                     document.getElementById("buyerT").style.display = "block";
                     document.getElementById("sellerT").style.display = "block";
                     document.getElementById("wantsT").style.display = "block";
-                    document.getElementById("propertyOverseesT").style.display = "block";
+                   document.getElementById("lawyerT").style.display = "block"; document.getElementById("propertyOverseesT").style.display = "block";
                 }
             }
         </script>
         <!-- <button type="button" onclick="hiddenDiv('programming language');" id="skills_submit">Programming Language</button>
 
-        function hiddenDiv(val) {    
-            document.getElementById('to-hide').style.display = 'none';    
-            if (val === "programming language") {        
-                if (!pl){            
-                    console.log(1);            
-                    document.getElementById('hidden_div1').style.display = 'block';            
-                    document.getElementById('hidden_div2').style.display = 'none';            
-                    document.getElementById('hidden_div3').style.display = 'none';            
-                    document.getElementById('hidden_div4').style.display = 'none';            
-                    pl = true;            
-                    dm = false;            
-                    ide = false;            
-                    lang = false;      
-                }       
+        function hiddenDiv(val) {
+            document.getElementById('to-hide').style.display = 'none';
+            if (val === "programming language") {
+                if (!pl){
+                    console.log(1);
+                    document.getElementById('hidden_div1').style.display = 'block';
+                    document.getElementById('hidden_div2').style.display = 'none';
+                    document.getElementById('hidden_div3').style.display = 'none';
+                    document.getElementById('hidden_div4').style.display = 'none';
+                    pl = true;
+                    dm = false;
+                    ide = false;
+                    lang = false;
+                }
                 else {
-                    document.getElementById('hidden_div1').style.display = 'none';            
-                    document.getElementById('to-hide').style.display = 'block';            
-                    pl = false;        
-                }    
-            } 
+                    document.getElementById('hidden_div1').style.display = 'none';
+                    document.getElementById('to-hide').style.display = 'block';
+                    pl = false;
+                }
+            }
         }
 
         FOR HIDING /buTTONS WHEN DIFFERENT USER IS SELECTEd -->
@@ -101,16 +107,16 @@
     <nav class = "navbar navbar-dark sticky-top bg-dark flex-mid-nowrap p-0 shadow">
         <a href = "index.php" id = "Reset"> <h1 class = "display-3 m-4 text-light">Real Estate</h1> </a>
     </nav>
-        
-        
-        
+
+
+
     <div class = "container-fluid">
-    
+
         <div class = "row">
-            
+
             <nav id = "sidebarMenu" class = "col-md-3 d-md-block bg-light" >
                 <div class = "sidebar-sticky pt-3">
-                        <ul class = "nav flex-column mb-2"> 
+                        <ul class = "nav flex-column mb-2">
                          <select class="form-control" name="dropdown-menu" id="dropdown-menu" onchange="doIt()" >
                               <option value="Manager">Manager</option>
                               <option value="Agent">Agent</option>
@@ -118,10 +124,10 @@
                          </select>
                         <li class = "nav-item" id = "agentT"> <a class = "nav-link mb-2 text-muted" id = "agentLink" >Agent Represents</a> </li>
                             <li class = "nav-item" id = "amenityT"> <a class = "nav-link mb-2 text-muted" href = "amenity/amenityView.php">Amenity</a> </li>
-                            <li class = "nav-item" id = "apartmentsT"> <a class = "nav-link mb-2 text-muted" href = "apartments/apartmentView.php">Apartments</a> </li>
+                            <li class = "nav-item" id = "apartmentsT"> <a class = "nav-link mb-2 text-muted" href = "apartments/apartmentView.php">Appartments</a> </li>
                             <li class = "nav-item" id = "appointsT" > <a class = "nav-link mb-2 text-muted" href = "appoints/appointsView.php">Appoints</a> </li>
-                            <li class = "nav-item" id = "branchT" > <a class = "nav-link mb-2 text-muted" href = "branch/branchView.php">Branch</a> </li>
-                            <li class = "nav-item" id = "branchLocationT"> <a class = "nav-link mb-2 text-muted" href = "branchLocation/branchLocationView.php">Branch Location</a> </li>
+                            <li class = "nav-item" id = "branchT" > <a class = "nav-link mb-2 text-muted" href = "branch/branchViews.pgh">Branch</a> </li>
+                            <li class = "nav-item" id = "branchLocationT"> <a class = "nav-link mb-2 text-muted" href = "branchLocation/branchLocation.php">Branch Location</a> </li>
                             <li class = "nav-item" id = "buyerT" > <a class = "nav-link mb-2 text-muted" href = "buyer/buyerView.php">Buyer</a> </li>
                             <li class = "nav-item" id = "employsT" > <a class = "nav-link mb-2 text-muted" href = "employs/employsView.php">Employs</a> </li>
                             <li class = "nav-item" id = "houseT" > <a class = "nav-link mb-2 text-muted" href = "house/houseView.php">House</a> </li>
@@ -137,5 +143,5 @@
                     </ul>
                 </div>
             </nav>
-            
+
             <main role = "main" class = "col-md-9 ml-sm-auto px-md-4">
