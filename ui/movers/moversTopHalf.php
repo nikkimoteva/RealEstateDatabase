@@ -16,7 +16,7 @@
      <body onload="doStuff3()">
 
     <nav class = "navbar navbar-dark sticky-top bg-dark flex-mid-nowrap p-0 shadow">
-        <a href = "index.php" id = "Reset"> <h1 class = "display-3 m-4 text-light">Real Estate</h1> </a>
+        <a href = "../index.php" id = "Reset"> <h1 class = "display-3 m-4 text-light">Real Estate</h1> </a>
     </nav>
         
         
