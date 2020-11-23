@@ -219,9 +219,9 @@ function handleSelectRequest() {
 function handleDeleteRequest() {
     global $db_conn;
 
-    $agentID = $_POST['agentid'];
+    $buyerid= $_POST['buyerid'];
 
-    $query = "DELETE FROM buyer WHERE agentID='" . $agentID . "'";
+    $query = "DELETE FROM buyer WHERE buyerid = '" . $buyerid . "'";
     executePlainSQL($query);
     executePlainSQL("commit");
 
